@@ -59,7 +59,7 @@ app.post('/send-sos', (req, res) => {
     console.log(`📩 Sending SOS to ${emergencyContact}:`, message);
 
     client.messages.create({
-        from: process.env.TWILIO_PHONE_NUMBER,
+        messagingServiceSid: process.env.TWILIO_MESSAGING_SERVICE_SID,  // ✅ Use Messaging Service SID
         to: emergencyContact,
         body: message
     })
