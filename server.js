@@ -41,12 +41,15 @@ app.post('/set-contact', (req, res) => {
  * Route to send SOS alert
  */
 app.post('/send-sos', (req, res) => {
+    console.log("📥 Incoming SOS request:", req.body); // Debugging
+
     if (!emergencyContact) {
         return res.status(400).json({ error: 'Emergency contact not set! Please set it first.' });
     }
 
     const { latitude, longitude } = req.body;
     if (!latitude || !longitude) {
+        console.log("❌ Missing location data in request!");
         return res.status(400).json({ error: 'Location data is required!' });
     }
 
@@ -69,6 +72,7 @@ app.post('/send-sos', (req, res) => {
         res.status(500).json({ error: err.message });
     });
 });
+
 
 // Start the server
 app.listen(PORT, () => {
