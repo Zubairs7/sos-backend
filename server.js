@@ -18,6 +18,13 @@ const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
 let emergencyContact = null;
 
 /**
+ * ✅ Root Route to Fix "Cannot GET /"
+ */
+app.get("/", (req, res) => {
+    res.send("🚀 Backend is running successfully!");
+});
+
+/**
  * Route to set emergency contact number
  */
 app.post('/set-contact', (req, res) => {
@@ -63,6 +70,7 @@ app.post('/send-sos', (req, res) => {
     });
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
